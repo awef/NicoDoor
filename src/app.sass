@@ -1,0 +1,143 @@
+html, body
+  :width 100%
+  :height 100%
+  :margin 0
+
+body
+  :font-size 14px
+  :background-color #eee
+  :color #333
+
+#left
+  :padding 3px
+  :position fixed
+  :width 150px
+  :height 100%
+  :overflow-y auto
+  :box-sizing border-box
+
+#right
+  :-webkit-box-flex 1
+  :padding-left 150px
+  :width 100%
+  :height 100%
+  :overflow-y auto
+  :box-sizing border-box
+
+@mixin drop_shadow
+  :box-shadow 1px 2px 3px rgba(#000, 0.5)
+
+@mixin drop_shadow_2
+  :box-shadow 1px 2px 3px rgba(#000, 0.5), 1px 2px 3px rgba(#000, 0.5) inset
+
+.view_menu
+  @include drop_shadow_2
+
+  $frame_color: #555
+
+  :background-color #fff
+  :border-radius 3px
+  :border 3px solid $frame_color
+  :margin-bottom 10px
+
+  h1
+    :font-size 16px
+    :margin 0
+    :padding 6px
+    :background-color $frame_color
+    :text-shadow 0 0 5px #000
+    :color #fff
+
+  ul
+    :list-style-type none
+    :margin 0
+    :padding 0
+
+  li
+    :-webkit-transition background-color 150ms ease-out
+    &:not(:last-of-type)
+      :border-bottom 1px solid #ccc
+    &:hover
+      :background-color rgba(#79c, 0.25)
+    &.selected
+      :background-color rgba(#ee0, 0.25)
+  a
+    :display block
+    :color inherit
+    :text-decoration none
+    :padding 6px
+
+    :text-overflow ellipsis
+    :white-space nowrap
+    :overflow hidden
+
+.view_item_list
+
+  &.searching
+    a:not(.search_hit)
+      :display none
+
+  header
+    @include drop_shadow
+    :margin 5px
+    :padding 5px
+    :background-color #555
+    :border-radius 3px
+    :display -webkit-box
+    h1
+      :font-size 18px
+      :text-shadow 0 0 5px #000
+      :color #fff
+      :margin 0
+      :-webkit-box-flex 1
+    input
+      :display block
+      :background-color #eee
+      :margin 0
+      :padding 2px 10px
+      :height 14px
+      :border none
+      :outline none
+      :border-radius 10px
+    ::-webkit-input-placeholder
+      :color #666
+
+  a
+    :display block
+    :float left
+
+    :margin 15px 7px
+    :width 130px
+    :height 130px
+
+    :margin 0
+    :width 140px
+    :height 140px
+
+    :font-size 11px
+    :color inherit
+    :text-decoration none
+    :word-break break-all
+    :-webkit-transition color 150ms ease-out
+    &:hover
+      :color #79c
+    &:after
+      :content attr(title)
+    img
+      @include drop_shadow
+      :width 130px
+      :height 100px
+      :margin 0 5px
+
+.message
+  @include drop_shadow
+  :margin 10px
+  :padding 10px
+  :border-radius 5px
+  :border 3px solid #999
+  :background-color #eee
+  :color #333
+  &.error
+    :border 3px solid #e00
+    :background-color #e33
+    :color #fff

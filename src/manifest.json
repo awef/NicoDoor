@@ -1,0 +1,22 @@
+{
+  "name" : "NicoDoor",
+  "version" : "0.0",
+  "description" : "ニコ動のランキングや、ブックマーク中の動画を見やすく表示",
+  "minimum_chrome_version" : "12",
+  "app" : {
+    "launch" : {
+      "local_path" : "app.html"
+    }
+  },
+  "permissions" : [
+    "bookmarks",
+    "unlimitedStorage",
+    "http://*.nicovideo.jp/*",
+    "http://*.smilevideo.jp/*",
+    "http://*.nicoseiga.jp/*",
+    "http://*.youtube.com/*"
+  ],
+  "icons" : {
+  	"128" : "img/nicodoor_128x128.png"
+  }
+}

@@ -1,0 +1,21 @@
+:ruby
+  app_version = "0.0"
+
+!!! 5
+%html(data-app_version="#{app_version}")
+  %head
+    %meta(charset="utf-8")
+    %title NicoDoor
+    %link(rel="stylesheet" href="/app.css?v=#{app_version}")
+    %script(src="/app.js?v=#{app_version}")
+  %body
+    #left
+    #right
+    #template(hidden)
+      .view_ranking_menu
+        %h1 Ranking
+        %ul
+          %li
+            %a(href="#!/ranking/fav/hourly/all") 毎時
+          %li
+            %a(href="#!/ranking/fav/daily/all") デイリー
