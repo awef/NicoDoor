@@ -1,50 +1,5 @@
 app.view = {}
 
-app.view.menu = (view) ->
-  view or= document.createElement("div")
-  view.classList.add("view_menu")
-
-  update_selected = ->
-    tmp = view.querySelector(".selected")
-    if tmp
-      tmp.classList.remove("selected")
-    tmp = view.querySelector("a[href=\"#{location.hash}\"]")
-    if tmp
-      tmp.parentNode.classList.add("selected")
-
-  window.addEventListener("hashchange", update_selected, false)
-  update_selected()
-
-  view
-
-app.view.ranking_menu = ->
-  view = document.querySelector("#template > .view_ranking_menu").cloneNode(true)
-  app.view.menu(view)
-
-app.view.bookmark_menu = ->
-  view = document.createElement("div")
-  view.className = "view_bookmark_menu"
-
-  h1 = document.createElement("h1")
-  h1.innerText = "Bookmark"
-  view.appendChild(h1)
-
-  ul = document.createElement("ul")
-  view.appendChild(ul)
-
-  app.bookmark.get_available_folder (array_of_tree) ->
-    for tree in array_of_tree
-      li = document.createElement("li")
-      a = document.createElement("a")
-      a.href = "#!/bookmark/#{encodeURIComponent(tree.id)}"
-      a.innerText = tree.title
-      li.appendChild(a)
-      ul.appendChild(li)
-
-    app.view.menu(view)
-
-  view
-
 app.view.ranking = (ranking_id) ->
   if not /// ^fav/(?:hourly|daily)/\w+$ ///.test(ranking_id)
     console.error("app.view.ranking: 不正な引数です", arguments)

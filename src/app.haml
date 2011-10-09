@@ -10,12 +10,14 @@
     %script(src="/app.js?v=#{app_version}")
   %body
     #left
-    #right
-    #template(hidden)
-      .view_ranking_menu
+      .ranking_menu
         %h1 Ranking
         %ul
           %li
             %a(href="#!/ranking/fav/hourly/all") 毎時
           %li
             %a(href="#!/ranking/fav/daily/all") デイリー
+      .bookmark_menu
+        %h1 Bookmark
+        %ul
+    #right

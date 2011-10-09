@@ -14,9 +14,28 @@ window.addEventListener "load", ->
       app.main()
 
 app.main = ->
-  left = document.getElementById("left")
-  left.appendChild(app.view.ranking_menu())
-  left.appendChild(app.view.bookmark_menu())
+  #メニュー関連
+  (->
+    #選択中のメニューに.selectedを付与する
+    update_selected = ->
+      old = document.querySelector("#left li.selected")
+      old?.classList.remove("selected")
+      now = document.querySelector("#left a[href=\"#{location.hash}\"]")
+      now?.parentNode.classList.add("selected")
+    window.addEventListener("hashchange", update_selected)
+
+    #ブックマークメニューの構築
+    ul = document.querySelector(".bookmark_menu > ul")
+    app.bookmark.get_available_folder (array_of_tree) ->
+      for tree in array_of_tree
+        li = document.createElement("li")
+        a = document.createElement("a")
+        a.href = "#!/bookmark/#{encodeURIComponent(tree.id)}"
+        a.textContent = tree.title
+        li.appendChild(a)
+        ul.appendChild(li)
+        update_selected()
+  )()
 
   update_view = (view) ->
     container = document.getElementById("right")
