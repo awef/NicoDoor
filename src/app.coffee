@@ -37,29 +37,31 @@ app.main = ->
         update_selected()
   )()
 
-  update_view = (view) ->
-    container = document.getElementById("right")
+  #コンテンツの表示に関わる処理
+  (->
+    update_view = (view) ->
+      container = document.getElementById("right")
 
-    old_view = container.firstChild
-    if old_view
-      container.removeChild(old_view)
+      if container.firstChild?
+        container.removeChild(container.firstChild)
 
-    container.appendChild(view)
+      container.appendChild(view)
 
-  on_hashchange = ->
-    res = ///^\#\!/bookmark/(.*)$///.exec(location.hash)
-    if res
-      update_view(app.view.bookmark(decodeURIComponent(res[1])))
-      return
+    on_hashchange = ->
+      res = ///^\#\!/bookmark/(.*)$///.exec(location.hash)
+      if res
+        update_view(app.view.bookmark(decodeURIComponent(res[1])))
+        return
 
-    res = ///^\#\!/ranking/(.*)$///.exec(location.hash)
-    if res
-      update_view(app.view.ranking(res[1]))
-    else
-      location.hash = "#!/ranking/fav/hourly/all"
+      res = ///^\#\!/ranking/(.*)$///.exec(location.hash)
+      if res
+        update_view(app.view.ranking(res[1]))
+      else
+        location.hash = "#!/ranking/fav/hourly/all"
 
-  on_hashchange()
-  window.addEventListener("hashchange", on_hashchange, false)
+    on_hashchange()
+    window.addEventListener("hashchange", on_hashchange, false)
+  )()
 
 app.url = {}
 
