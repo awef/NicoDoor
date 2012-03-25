@@ -3,7 +3,7 @@ DBG = build
 
 haml = haml -q $(1) $(2)
 sass = sass --style compressed --no-cache $(1) $(2)
-coffee = cat $(1) | coffee -cbsp | uglifyjs -o $(2)
+coffee = coffee -cbj $(2) $(1)
 svg = convert\
   -background transparent\
   -resize $(2)x$(3)\
