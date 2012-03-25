@@ -1,20 +1,19 @@
 app = {}
 
 window.addEventListener "load", ->
+  #バージョン整合性確認
   xhr = new XMLHttpRequest()
   xhr.open("GET", "/manifest.json?#{Date.now()}", false)
   xhr.send(null)
   app.manifest = JSON.parse(xhr.responseText)
 
-  if location.pathname is "/app.html"
-    html_version = document.documentElement.getAttribute("data-app_version")
-    if app.manifest.version isnt html_version
-      location.reload(true)
-    else
-      app.main()
-  return
+  return if location.pathname isnt "/app.html"
 
-app.main = ->
+  html_version = document.documentElement.getAttribute("data-app_version")
+  if app.manifest.version isnt html_version
+    location.reload(true)
+    return
+
   #メニュー関連
   do ->
     #選択中のメニューに.selectedを付与する
