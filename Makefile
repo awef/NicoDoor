@@ -31,13 +31,8 @@ ${DBG}/manifest.json: ${SRC}/manifest.json
 ${DBG}/app.html: ${SRC}/app.haml
 	$(call haml, ${SRC}/app.haml, ${DBG}/app.html)
 
-${DBG}/app.js:\
-  ${SRC}/app.coffee\
-  ${SRC}/app.*.coffee
-	$(call coffee,\
-    ${SRC}/app.coffee\
-    ${SRC}/app.*.coffee\
-    , ${DBG}/app.js)
+${DBG}/app.js: ${SRC}/app.coffee ${SRC}/app.*.coffee
+	$(call coffee, ${SRC}/app.coffee ${SRC}/app.*.coffee, ${DBG}/app.js)
 
 ${DBG}/app.css: ${SRC}/app.sass
 	$(call sass, ${SRC}/app.sass, ${DBG}/app.css)
