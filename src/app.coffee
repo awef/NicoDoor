@@ -15,7 +15,7 @@ window.addEventListener "load", ->
 
 app.main = ->
   #メニュー関連
-  (->
+  do ->
     #選択中のメニューに.selectedを付与する
     update_selected = ->
       old = document.querySelector("#left li.selected")
@@ -35,10 +35,9 @@ app.main = ->
         li.appendChild(a)
         ul.appendChild(li)
         update_selected()
-  )()
 
   #コンテンツの表示に関わる処理
-  (->
+  do ->
     update_view = (view) ->
       container = document.getElementById("right")
 
@@ -61,7 +60,6 @@ app.main = ->
 
     on_hashchange()
     window.addEventListener("hashchange", on_hashchange, false)
-  )()
 
 app.url = {}
 
