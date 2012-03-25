@@ -95,7 +95,7 @@ app.view.item_list = (title, item_list, view) ->
     for tmp in Array.prototype.slice.apply(view.getElementsByClassName("search_hit"))
       tmp.classList.remove("search_hit")
 
-    query = this.value.toLowerCase()
+    query = @value.toLowerCase()
     if query
       for tmp in view.getElementsByTagName("a")
         if tmp.title.toLowerCase().indexOf(query) isnt -1
@@ -105,7 +105,7 @@ app.view.item_list = (title, item_list, view) ->
 
   input.addEventListener "keyup", (e) ->
     if e.which is 27 #Esc
-      this.value = ""
+      @value = ""
       view.classList.remove("searching")
     return
 
