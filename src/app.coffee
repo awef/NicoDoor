@@ -67,37 +67,41 @@ window.addEventListener "load", ->
     return
   return
 
-app.url = {}
+do ->
+  module = {}
 
-app.url._reg =
-  supported: ///^http://(?:www\.youtube\.com/watch\?v=([^&]+)|www\.nicovideo\.jp/watch/[a-z]{2}(\d+))///
-  youtube: ///^http://www\.youtube\.com/watch\?v=([^&]+)///
-  nicovideo: ///^http://www\.nicovideo\.jp/watch/[a-z]{2}(\d+)///
+  reg =
+    supported: ///^http://(?:www\.youtube\.com/watch\?v=([^&]+)|www\.nicovideo\.jp/watch/[a-z]{2}(\d+))///
+    youtube: ///^http://www\.youtube\.com/watch\?v=([^&]+)///
+    nicovideo: ///^http://www\.nicovideo\.jp/watch/[a-z]{2}(\d+)///
 
-app.url.is_supported = (url) ->
-  app.url._reg.supported.test(url)
+  module.is_supported = (url) ->
+    reg.supported.test(url)
 
-app.url.is_youtube = (url) ->
-  app.url._reg.youtube.test(url)
+  module.is_youtube = (url) ->
+    reg.youtube.test(url)
 
-app.url.is_nicovideo = (url) ->
-  app.url._reg.nicovideo.test(url)
+  module.is_nicovideo = (url) ->
+    reg.nicovideo.test(url)
 
-app.url.get_thumbnail_path = (url) ->
-  if app.url.is_youtube(url)
-    res = app.url._reg.youtube.exec(url)
-    "http://img.youtube.com/vi/#{res[1]}/default.jpg"
+  module.get_thumbnail_path = (url) ->
+    if @is_youtube(url)
+      res = reg.youtube.exec(url)
+      "http://img.youtube.com/vi/#{res[1]}/default.jpg"
 
-  else if app.url.is_nicovideo(url)
-    res = app.url._reg.nicovideo.exec(url)
-    "http://tn-skr#{(parseInt(res[1], 10) % 4 + 1)}.smilevideo.jp/" +
-      "smile?i=#{res[1]}"
+    else if @is_nicovideo(url)
+      res = reg.nicovideo.exec(url)
+      "http://tn-skr#{(parseInt(res[1], 10) % 4 + 1)}.smilevideo.jp/" +
+        "smile?i=#{res[1]}"
 
-  else
-    null
+    else
+      null
 
-app.url.safe = (url) ->
-  if /// ^https?:// ///.test(url) then url else "javascript:undefined;"
+  module.safe = (url) ->
+    if /// ^https?:// ///.test(url) then url else "javascript:undefined;"
+
+  app.url = module
+  return
 
 app.bookmark = {}
 
