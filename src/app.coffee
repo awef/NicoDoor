@@ -66,6 +66,7 @@ app.main = ->
     on_hashchange()
     window.addEventListener("hashchange", on_hashchange, false)
     return
+  return
 
 app.url = {}
 
