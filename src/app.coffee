@@ -103,23 +103,27 @@ do ->
   app.url = module
   return
 
-app.bookmark = {}
+do ->
+  module = {}
 
-app.bookmark.get_available_folder = (callback) ->
-  all_folder = []
+  module.get_available_folder = (callback) ->
+    all_folder = []
 
-  chrome.bookmarks.getTree (array_of_tree) ->
-    fn = (tree) ->
-      if "children" of tree
-        all_folder.push(tree)
-        tree.children.forEach(fn)
+    chrome.bookmarks.getTree (array_of_tree) ->
+      fn = (tree) ->
+        if "children" of tree
+          all_folder.push(tree)
+          tree.children.forEach(fn)
+        return
+      array_of_tree.forEach(fn)
+
+      available_folder = all_folder.filter (tree) ->
+        tree.children.some (tree) ->
+          "url" of tree and app.url.is_supported(tree.url)
+
+      callback(available_folder)
       return
-    array_of_tree.forEach(fn)
-
-    available_folder = all_folder.filter (tree) ->
-      tree.children.some (tree) ->
-        "url" of tree and app.url.is_supported(tree.url)
-
-    callback(available_folder)
     return
+
+  app.bookmark = module
   return
