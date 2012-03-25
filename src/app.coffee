@@ -12,6 +12,7 @@ window.addEventListener "load", ->
       location.reload(true)
     else
       app.main()
+  return
 
 app.main = ->
   #メニュー関連
@@ -22,6 +23,7 @@ app.main = ->
       old?.classList.remove("selected")
       now = document.querySelector("#left a[href=\"#{location.hash}\"]")
       now?.parentNode.classList.add("selected")
+      return
     window.addEventListener("hashchange", update_selected)
 
     #ブックマークメニューの構築
@@ -35,6 +37,8 @@ app.main = ->
         li.appendChild(a)
         ul.appendChild(li)
         update_selected()
+      return
+    return
 
   #コンテンツの表示に関わる処理
   do ->
@@ -45,6 +49,7 @@ app.main = ->
         container.removeChild(container.firstChild)
 
       container.appendChild(view)
+      return
 
     on_hashchange = ->
       res = ///^\#\!/bookmark/(.*)$///.exec(location.hash)
@@ -60,6 +65,7 @@ app.main = ->
 
     on_hashchange()
     window.addEventListener("hashchange", on_hashchange, false)
+    return
 
 app.url = {}
 
@@ -103,6 +109,7 @@ app.bookmark.get_available_folder = (callback) ->
       if "children" of tree
         all_folder.push(tree)
         tree.children.forEach(fn)
+      return
     array_of_tree.forEach(fn)
 
     available_folder = all_folder.filter (tree) ->
@@ -110,4 +117,5 @@ app.bookmark.get_available_folder = (callback) ->
         "url" of tree and app.url.is_supported(tree.url)
 
     callback(available_folder)
-
+    return
+  return

@@ -17,7 +17,7 @@ app.view.ranking = (ranking_id) ->
   view.appendChild(message)
 
   xhr = new XMLHttpRequest()
-  xhr_timer = setTimeout((-> xhr.abort()), 30 * 1000)
+  xhr_timer = setTimeout((-> xhr.abort(); return), 30 * 1000)
   xhr.onreadystatechange = ->
     if xhr.readyState is 4
       clearTimeout(xhr_timer)
@@ -42,6 +42,7 @@ app.view.ranking = (ranking_id) ->
       else
         message.classList.add("error")
         message.textContent = "通信エラー (エラーコード: #{xhr.status})"
+    return
   xhr.open("GET", xhr_path)
   xhr.send(null)
 
@@ -70,6 +71,8 @@ app.view.bookmark = (bookmark_id) ->
             title: tree.title.replace(/^(.+)\u0020\u2010\u0020\u30cb\u30b3\u30cb\u30b3\u52d5\u753b\u0028.*\u0029$/, "$1")
 
       app.view.item_list(title, item_list, view)
+      return
+    return
   view
 
 app.view.item_list = (title, item_list, view) ->
@@ -104,6 +107,7 @@ app.view.item_list = (title, item_list, view) ->
     if e.which is 27 #Esc
       this.value = ""
       view.classList.remove("searching")
+    return
 
   header.appendChild(input)
 
@@ -118,6 +122,7 @@ app.view.item_list = (title, item_list, view) ->
     frag.appendChild(a)
 
     img.src = app.url.get_thumbnail_path(item.url)
+    return
 
   view.appendChild(frag)
   view
