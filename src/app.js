@@ -197,7 +197,7 @@ window.addEventListener("load", function () {
       view.element.classList.add("searching");
 
       Array.prototype.forEach.call(
-        view.getElementsByClassName("search_hit"),
+        view.element.getElementsByClassName("search_hit"),
         function (tmp) {
           tmp.classList.remove("search_hit");
         }
@@ -207,7 +207,7 @@ window.addEventListener("load", function () {
 
       if (query) {
         Array.prototype.forEach.call(
-          view.getElementsByTagName("a"),
+          view.element.getElementsByTagName("a"),
           function (tmp) {
             if (tmp.title.toLowerCase().indexOf(query) !== -1) {
               tmp.classList.add("search_hit");
@@ -216,14 +216,14 @@ window.addEventListener("load", function () {
         );
       }
       else {
-        view.classList.remove("searching");
+        view.element.classList.remove("searching");
       }
     });
 
     input.addEventListener("keyup", function (e) {
       if (e.which === 27) { //Esc
         this.value = "";
-        view.classList.remove("searching");
+        view.element.classList.remove("searching");
       }
     });
   };
