@@ -18,6 +18,6 @@
     "http://*.youtube.com/*"
   ],
   "icons" : {
-  	"128" : "img/nicodoor_128x128.png"
+    "128" : "img/nicodoor_128x128.png"
   }
 }
