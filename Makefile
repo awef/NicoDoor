@@ -3,7 +3,6 @@ DBG = build
 
 haml = haml -q $(1) $(2)
 sass = sass --style compressed --no-cache $(1) $(2)
-coffee = coffee -cbj $(2) $(1)
 svg = convert\
   -background transparent\
   -resize $(2)x$(3)\
@@ -31,8 +30,8 @@ ${DBG}/manifest.json: ${SRC}/manifest.json
 ${DBG}/app.html: ${SRC}/app.haml
 	$(call haml, ${SRC}/app.haml, ${DBG}/app.html)
 
-${DBG}/app.js: ${SRC}/app.coffee ${SRC}/app.*.coffee
-	$(call coffee, ${SRC}/app.coffee ${SRC}/app.*.coffee, ${DBG}/app.js)
+${DBG}/app.js: ${SRC}/app.js
+	cp ${SRC}/app.js ${DBG}/app.js
 
 ${DBG}/app.css: ${SRC}/app.sass
 	$(call sass, ${SRC}/app.sass, ${DBG}/app.css)
