@@ -2,7 +2,8 @@
   "name" : "NicoDoor",
   "version" : "0.0",
   "description" : "ニコ動のランキングや、ブックマーク中の動画を見やすく表示",
-  "minimum_chrome_version" : "12",
+  "minimum_chrome_version" : "21",
+  "manifest_version": 2,
   "app" : {
     "launch" : {
       "local_path" : "app.html"
